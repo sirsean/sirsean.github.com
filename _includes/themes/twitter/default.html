@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>    
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>    
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ ASSET_PATH }}/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
+          <ul class="nav">
+            {% assign pages_list = site.pages %}
+            {% assign group = 'navigation' %}
+            {% include JB/pages_list %}
+            <li><a href="/feed">RSS</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="span4" style="margin-left: -20px;">
+            <img src="/assets/face.jpg" />
+        </div>
+        <div class="span4" style="padding: 12px;">
+            <h2>Sean Schulte</h2>
+            <h2><small>Twitter: <a href="http://twitter.com/sirsean">@sirsean</a></small></h2>
+            <ul>
+                <li><a href="/counting-hero">Counting Hero</a></li>
+                <li><a href="/fun-balloon">Fun Balloon</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        {{ content }}
+      </div>
+
+      <footer>
+        <p>&copy; {{ site.author.name }} 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'http://owa.vikinghammer.com/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'a558c54bba8c8c1cafce925ce01640ea']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+owa_cmds.push(['trackDomStream']);
+
+(function() {
+	var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+	owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+	_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+	var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<!-- End Open Web Analytics Code -->
+
+  </body>
+</html>
