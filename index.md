@@ -1,6 +1,5 @@
 ---
 layout: page
-title: Vikinghammer
 ---
 {% include JB/setup %}
 
