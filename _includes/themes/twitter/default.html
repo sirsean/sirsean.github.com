@@ -2,7 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }}</title>
+    <title>
+    {% if page.title %}
+    {{ page.title }}
+    {% else %}
+    Vikinghammer
+    {% endif %}
+    </title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>    
@@ -51,9 +57,12 @@
             <h2 style="line-height: 0.9em;"><small>Twitter: <a href="http://twitter.com/sirsean">@sirsean</a></small></h2>
             <h2 style="line-height: 0.9em;"><small>Github: <a href="http://github.com/sirsean">github.com/sirsean</a></small></h2>
             <ul style="margin-top: 0.5em;">
-                <li><a href="https://play.google.com/store/apps/details?id=com.vikinghammer.mlb.scoreboard.full">MLB Scoreboard</a></li>
+                <li><strike>MLB Scoreboard</strike></li>
+                <li><strike>NFL Scoreboard</strike></li>
                 <li><a href="/counting-hero">Counting Hero</a></li>
                 <li><a href="/fun-balloon">Fun Balloon</a></li>
+                <li><a href="/chicago-train-track">Chicago Train Track</a></li>
+                <li><a href="/cricket-scoreboard">Cricket Scoreboard</a></li>
             </ul>
         </div>
     </div>
