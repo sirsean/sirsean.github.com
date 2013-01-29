@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Dependo Pull Request
+date: 2013-01-29 10:00:00
 tags: [Ruby, Dependo, Open Source]
 author: sirsean
 ---
