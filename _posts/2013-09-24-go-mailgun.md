@@ -27,102 +27,86 @@ You can see [all the code on GitHub](https://github.com/sirsean/go-mailgun/blob/
 
 I wanted to pass a struct representing my message, which is really easy to define in Go:
 
-```
-type Message struct {
-    FromName string
-    FromAddress string
-    ToAddress string
-    Subject string
-    Body string
-}
-```
+    type Message struct {
+        FromName string
+        FromAddress string
+        ToAddress string
+        Subject string
+        Body string
+    }
 
 Along with a method to format the from name/address:
 
-```
-func (m Message) From() string {
-    return fmt.Sprintf("%s <%s>", m.FromName, m.FromAddress)
-}
-```
+    func (m Message) From() string {
+        return fmt.Sprintf("%s <%s>", m.FromName, m.FromAddress)
+    }
 
 So then I just define my ```Send``` method:
 
-```
-func Send(message Message) error {
-    client := &http.Client{}
-
-```
+    func Send(message Message) error {
+        client := &http.Client{}
 
 Here we set up the POST variables based on the Message provided:
 
-```
-    values := make(url.Values)
-    values.Set("from", message.From())
-    values.Set("to", message.ToAddress)
-    values.Set("subject", message.Subject)
-    values.Set("text", message.Body)
-```
+        values := make(url.Values)
+        values.Set("from", message.From())
+        values.Set("to", message.ToAddress)
+        values.Set("subject", message.Subject)
+        values.Set("text", message.Body)
 
 And then construct an HTTP request with the Content-Type header and Basic Auth:
 
-```
-    request, _ := http.NewRequest("POST", ApiEndpoint, strings.NewReader(values.Encode()))
-    request.Header.Set("content-type", "application/x-www-form-urlencoded")
-    request.SetBasicAuth("api", ApiKey)
-```
+        request, _ := http.NewRequest("POST", ApiEndpoint, strings.NewReader(values.Encode()))
+        request.Header.Set("content-type", "application/x-www-form-urlencoded")
+        request.SetBasicAuth("api", ApiKey)
 
 Then we send the request (note that Go lets us "defer" closing the body until we return from this method, which is _very_ convenient, in case any of you have experience writing deeply nested try/catch/finally blocks in Java to do the same thing ... actually, I'm sorry I mentioned it, let's just move on):
 
-```
-    response, e1 := client.Do(request)
-    if e1 != nil {
-        fmt.Println("Failed to send request")
-        fmt.Println(e1)
-        return e1
-    }
-    defer response.Body.Close()
-```
+        response, e1 := client.Do(request)
+        if e1 != nil {
+            fmt.Println("Failed to send request")
+            fmt.Println(e1)
+            return e1
+        }
+        defer response.Body.Close()
 
 And I read the response here, even though I really don't need it. Although printing it in the logs was useful, at the beginning when I hadn't set the Content-Type and Mailgun's error message told me it couldn't send a message without a "from" parameter. I took that to mean that it wasn't receiving the parameters, and it wasn't long before I figured out it needed the Content-Type.
 
-```
-    body, e2 := ioutil.ReadAll(response.Body)
-    if e2 != nil {
-        fmt.Println("Failed to read response")
-        fmt.Println(e2)
-        return e2
-    }
+        body, e2 := ioutil.ReadAll(response.Body)
+        if e2 != nil {
+            fmt.Println("Failed to read response")
+            fmt.Println(e2)
+            return e2
+        }
 
-    fmt.Println(string(body))
-    return nil
-}
-```
+        fmt.Println(string(body))
+        return nil
+    }
 
 So that's easy! But that's if you want to write the method yourself, which I don't intend to do again. Using it is even easier, as demonstrated in this degenerate example app:
 
-```
-import (
-    "github.com/sirsean/go-mailgun/mailgun"
-)
+    import (
+        "github.com/sirsean/go-mailgun/mailgun"
+    )
 
-func main() {
-    mailgun.ApiEndpoint = "https://api.mailgun.net/v2/YOURNAME.mailgun.org/messages"
-    mailgun.ApiKey = "YOURKEY"
+    func main() {
+        mailgun.ApiEndpoint = "https://api.mailgun.net/v2/YOURNAME.mailgun.org/messages"
+        mailgun.ApiKey = "YOURKEY"
 
-    go func() {
-        err := mailgun.Send(mailgun.Message{
-            FromName: "Foo Bar",
-            FromAddress: "foo@bar.test",
-            ToAddress: "recipient@bar.test",
-            Subject: "This is an example message",
-            Body: "It's pretty easy to send messages via Mailgun!",
-        })
-        if err != nil {
-            // you can handle sending errors here
-        }
-    }()
-}
-```
+        go func() {
+            err := mailgun.Send(mailgun.Message{
+                FromName: "Foo Bar",
+                FromAddress: "foo@bar.test",
+                ToAddress: "recipient@bar.test",
+                Subject: "This is an example message",
+                Body: "It's pretty easy to send messages via Mailgun!",
+            })
+            if err != nil {
+                // you can handle sending errors here
+            }
+        }()
+    }
+
 
 I set my endpoint/key once (in my app I do it in ```main.main```, having read the values from a YAML file), and then send the email within a goroutine. In this case it's an anonymous function, but obviously it doesn't have to be; in my MLB Notifier application I name a separate method that calls ```mailgun.Send```, because in that case it makes the code clearer.
 
