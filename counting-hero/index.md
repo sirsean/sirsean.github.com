@@ -13,9 +13,8 @@ You can count up to ten, and then it's time to start over.
 
 For what it's worth, my son loves it. He finds the logo and opens it on his own, and he drags the orbs onto the sun. I hope it's helping him to develop an interest in counting, and in numbers.
 
-It's available for Android and for iOS. It works on phones and tablets.
+It's available for Android. It works on phones and tablets.
 
 - [Counting Hero Free](https://play.google.com/store/apps/details?id=com.vikinghammer.countinghero.google.free) at Google Play
 - [Counting Hero](https://play.google.com/store/apps/details?id=com.vikinghammer.countinghero.google.full) $0.99 at Google Play
 - [Counting Hero](http://www.amazon.com/Vikinghammer-Counting-Hero/dp/B007N8VK10/ref=sr_1_1?s=mobile-apps&ie=UTF8&qid=1335122754&sr=1-1) $0.99 at the Amazon Appstore
-- [Counting Hero](http://itunes.apple.com/us/app/counting-hero/id512980073?mt=8) $0.99 at the Apple App Store (for iPhone or iPad)

@@ -8,6 +8,6 @@ My name is Sean Schulte; I live in Chicago, and am a computer programmer and a b
 
 I graduated from the University of Chicago with a degree in Computer Science.
 
-In the past I’ve started my own company (Dayraven; a Javascript seating chart application for classrooms) and worked as the lead developer for another startup (ZedZone; a social networking site), and currently work at a more established company (Trustwave; an internet security company).
+In the past I’ve started my own company (Dayraven; a Javascript seating chart application for classrooms) and worked as the lead developer for another startup (ZedZone; a social networking site), and as a developer at a more established company (Trustwave; an internet security company). I currently work at Centro (a digital media/advertising company).
 
-At work, I write Java and Ruby, and do mobile security research. At home, I write Ruby for server-side stuff, and also Java for Android apps and Objective-C for iOS apps.
+At work, I work in Ruby on Rails. At home, I write some Ruby but have been moving more and more to Go, and also Java for Android apps and Objective-C for iOS apps.
